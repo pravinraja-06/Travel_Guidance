@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= place.name %> - Details</title>
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/information.css" />
+  </head>
+  <body>
+    <%- include("partials/header") %>
+
+    <div class="container">
+      <div class="image-gallery">
+        <% images.forEach(img => { %>
+        <img src="<%= img.url %>" alt="<%= img.alt %>" class="place-image" />
+        <% }); %>
+      </div>
+
+      <div class="details">
+        <div class="place-header"><%= place.name %></div>
+        <div class="place-weather">
+          🌤 <%= place.weather %><br />
+          Feels like: <strong><%= place.feels_like %></strong><br />
+          Humidity: <strong><%= place.humidity %></strong><br />
+          Wind speed: <strong><%= place.wind %></strong><br />
+          Pressure: <strong><%= place.pressure %></strong>
+        </div>
+        <% if (place.point) { %>
+        <a
+          href="https://www.google.com/maps?q=<%= place.point.lat %>,<%= place.point.lon %>"
+          target="_blank"
+          class="map-link"
+          >🌍 View on Map</a
+        >
+        <% } %>
+        <a href="/destinations" class="back-link">← Back to Destinations</a>
+      </div>
+    </div>
+  </body>
+</html>

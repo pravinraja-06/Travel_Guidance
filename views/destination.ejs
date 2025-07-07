@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Explore Destination - Travel Guidance</title>
+    <link rel="stylesheet" href="/css/destination.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+  </head>
+  <body>
+    <%- include("partials/header") %>
+    <div class="container">
+      <h1>🌍 Trending Tourist Places</h1>
+
+      <!-- Form to enter city name -->
+      <form action="/explore" method="POST">
+        <input
+          type="text"
+          name="city"
+          placeholder="Enter city name..."
+          required
+        />
+
+        <select name="category" required>
+          <option value="">-- Select Category --</option>
+          <option value="historic">Historic</option>
+          <option value="architecture">Architecture</option>
+          <option value="cultural">Cultural</option>
+          <option value="natural">Natural</option>
+          <option value="beaches">Beaches</option>
+          <option value="sport">Sports</option>
+        </select>
+
+        <input type="submit" value="Search" />
+      </form>
+      <!-- Display results if available -->
+      <% if (locals.places && locals.places.length > 0) { %>
+      <ul>
+        <% places.forEach(place => { %>
+        <li>
+          <div class="place-name">
+          <a href="/information/<%= place.name %>/<%= place.point.lat %>/<%= place.point.lon %>"><%= place.name %></a>
+        </div>
+
+          <div class="place-type"><%= place.kinds?.replaceAll('_', ' ') %></div>
+
+          <% if (place.point) { %>
+          <div class="place-map">
+            <a
+              href="https://www.google.com/maps?q=<%= place.point.lat %>,<%= place.point.lon %>"
+              target="_blank"
+            >
+              📍 View on Map
+            </a>
+          </div>
+          <% } %>
+        </li>
+        <% }) %>
+      </ul>
+      <% } else if (typeof places !== 'undefined') { %>
+      <p>No tourist places found for this city.</p>
+      <% } %>
+    </div>
+  </body>
+</html>

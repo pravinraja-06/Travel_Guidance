@@ -1,0 +1,133 @@
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at top left, #1a1a1a, #000000);
+  color: #eee;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* Navbar */
+.navbar {
+  background-color: rgba(20, 20, 20, 0.9);
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+.navbar h1 {
+  font-size: 26px;
+  color: #00f7ff;
+  font-weight: bold;
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+}
+
+.navbar a {
+  color: #ccc;
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.navbar a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  left: 0;
+  bottom: -5px;
+  background: #00f7ff;
+  transition: width 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #00f7ff;
+}
+
+.navbar a:hover::after {
+  width: 100%;
+}
+
+/* Dashboard */
+.dashboard {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.dashboard h2 {
+  font-size: 36px;
+  margin-bottom: 15px;
+  color: #00f7ff;
+}
+
+.dashboard p {
+  font-size: 18px;
+  margin-bottom: 40px;
+  color: #ccc;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 25px 35px;
+  border-radius: 12px;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.1), transparent, rgba(255,255,255,0.1));
+  transform: rotate(25deg);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.card:hover::before {
+  opacity: 1;
+  animation: shimmer 1s linear infinite;
+}
+
+@keyframes shimmer {
+  from { transform: rotate(25deg) translateX(-100%); }
+  to { transform: rotate(25deg) translateX(100%); }
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+  background: rgba(255, 255, 255, 0.08);
+}
